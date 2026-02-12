@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aiautomationandover.co.uk/sitemap.xml
+Sitemap: https://aiserviceshampshire.co.uk/sitemap.xml
