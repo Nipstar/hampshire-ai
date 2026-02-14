@@ -254,7 +254,7 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
+      z-index: 10000;
       background: rgba(10, 15, 28, 0.8);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -339,43 +339,73 @@
 
     .nav__mobile {
       position: fixed;
-      top: 72px;
+      top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(10, 15, 28, 0.95);
-      backdrop-filter: blur(16px);
-      padding: 40px 24px;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: #0a0f1c;
+      z-index: 9999;
+      padding: 96px 32px 40px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 0;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-10px);
-      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .nav__mobile.active {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
     }
 
     .nav__mobile a {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--text-secondary);
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       transition: color 0.2s;
     }
 
+    .nav__mobile a:last-child {
+      border-bottom: none;
+    }
+
     .nav__mobile a:hover {
-      color: var(--text-primary);
+      color: var(--accent-blue);
     }
 
     .nav__mobile .nav__cta {
-      display: inline-block;
+      display: block;
       text-align: center;
-      margin-top: 8px;
+      margin-top: auto;
+      padding: 16px 24px;
+      background: var(--accent-green);
+      color: #000000;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 8px;
+      border-bottom: none;
+    }
+
+    .nav__mobile .nav__cta:hover {
+      color: #000000;
+    }
+
+    /* Hamburger to X animation */
+    .nav__hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav__hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav__hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     @media (max-width: 768px) {
@@ -874,7 +904,7 @@
       pointer-events: none;
     }
 
-    @media (max-width: 1024px) and (min-width: 481px) {
+    @media (max-width: 1024px) and (min-width: 769px) {
       .services__grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -884,7 +914,7 @@
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
       .services__grid {
         grid-template-columns: 1fr;
       }
@@ -1160,7 +1190,7 @@
       }
 
       .stats__grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 16px;
       }
     }
@@ -1937,15 +1967,16 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-    <div class="nav__mobile" id="navMobile" role="menu">
-      <a href="#services" role="menuitem">Services</a>
-      <a href="#demo" role="menuitem">Demo</a>
-      <a href="#how-it-works" role="menuitem">How It Works</a>
-      <a href="#why-us" role="menuitem">Why Us</a>
-      <a href="#faq" role="menuitem">FAQ</a>
-      <a href="#contact" class="nav__cta" role="menuitem">Book a Free Discovery Call</a>
-    </div>
   </nav>
+
+  <div class="nav__mobile" id="navMobile" role="menu">
+    <a href="#services" role="menuitem">Services</a>
+    <a href="#demo" role="menuitem">Demo</a>
+    <a href="#how-it-works" role="menuitem">How It Works</a>
+    <a href="#why-us" role="menuitem">Why Us</a>
+    <a href="#faq" role="menuitem">FAQ</a>
+    <a href="#contact" class="nav__cta" role="menuitem">Book a Free Discovery Call</a>
+  </div>
 
   <main>
 
@@ -2821,15 +2852,50 @@
       /* ── Mobile Nav ──────────────────────────────── */
       const toggle = document.getElementById('navToggle');
       const mobile = document.getElementById('navMobile');
+
+      var scrollY = 0;
+
+      function closeMenu() {
+        mobile.classList.remove('active');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.overflow = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      }
+
+      function openMenu() {
+        scrollY = window.scrollY;
+        mobile.classList.add('active');
+        toggle.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Close menu');
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.style.overflow = 'hidden';
+        document.body.style.width = '100%';
+      }
+
       toggle.addEventListener('click', function () {
-        const open = mobile.classList.toggle('active');
-        toggle.setAttribute('aria-expanded', open);
+        if (mobile.classList.contains('active')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
       });
+
       mobile.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
-          mobile.classList.remove('active');
-          toggle.setAttribute('aria-expanded', 'false');
+          closeMenu();
         });
+      });
+
+      /* Close menu on outside tap (clicking the mobile overlay area outside links) */
+      mobile.addEventListener('click', function (e) {
+        if (e.target === mobile) closeMenu();
       });
 
       /* ── Scroll Reveal ───────────────────────────── */
