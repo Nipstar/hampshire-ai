@@ -2093,6 +2093,7 @@
       data-agent-id="agent_1c30d12544e2aedfc07ac8be1c"
       data-title="Antek AI Assistant"
       data-bot-name="Antek AI"
+      data-fab-text="Ask Antek AI"
       data-color="#10b981"
       data-popup-message="Hi! Quick question about AI for your Hampshire business?"
       data-show-ai-popup="true"
@@ -2415,7 +2416,7 @@
               website.</p>
             <!-- CHATBOT EMBED: Replace this comment with the chatbot widget embed script -->
             <!-- e.g. Voiceflow, Botpress, or AAVAC Bot widget code -->
-            <a href="https://boltelectrical.uk/" target="_blank" rel="noopener noreferrer" class="demo-card__cta">
+            <a href="#" onclick="event.preventDefault(); window.openAntekChat && window.openAntekChat();" class="demo-card__cta">
               Try the Chatbot
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -2501,8 +2502,8 @@
               </li>
             </ul>
             <div class="demo-case__actions">
-              <a href="https://boltelectrical.uk/" target="_blank" rel="noopener noreferrer" class="demo-case__link">
-                Visit boltelectrical.uk
+              <a href="https://www.antekautomation.com" target="_blank" rel="noopener noreferrer" class="demo-case__link">
+                Visit antekautomation.com
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                   stroke-linecap="round" stroke-linejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -3112,6 +3113,19 @@
         }
       });
     }, { passive: true });
+      /* Open Retell chat widget programmatically (used by Demo CTA) */
+      window.openAntekChat = function() {
+        if (window.gtag) gtag('event', 'chat_start', { page_town: window.__antek_town || 'unknown', cta_position: 'demo-cta' });
+        // Walk DOM looking for the Retell widget shadow host
+        var hosts = document.querySelectorAll('*');
+        for (var i = 0; i < hosts.length; i++) {
+          if (hosts[i].shadowRoot) {
+            var btn = hosts[i].shadowRoot.querySelector('button');
+            if (btn) { btn.click(); return; }
+          }
+        }
+      };
+
 
     })();
   </script>
