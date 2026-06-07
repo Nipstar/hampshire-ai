@@ -110,6 +110,7 @@
     "@id": "https://www.antekautomation.com/#andynorman",
     "name": "Andy Norman",
     "jobTitle": "Founder",
+    "image": "https://www.antekautomation.com/andy-norman.webp",
     "worksFor": {"@id": "https://aiserviceshampshire.co.uk/#organization"},
     "knowsAbout": [
       "AI voice agents",
@@ -3170,18 +3171,53 @@
         <div class="section-header reveal">
           <p class="section-label">Meet the Founder</p>
           <h2 class="section-title" id="founder-heading">Built by Andy Norman, hands-on with every build</h2>
-          <p class="section-subtitle">Antek Automation was founded by Andy Norman. After 30+ years in field service and
-            managed print — progressing from field engineer to service management — Andy builds AI voice agents,
-            chatbots and workflow automation for small businesses across Hampshire, as a Certified Retell AI Partner.
-            Based in Andover, he is hands-on with every build.</p>
-          <p class="section-subtitle">
-            <a href="https://www.linkedin.com/in/andy-norman-ab78443a1" target="_blank" rel="author noopener noreferrer">Andy Norman on LinkedIn</a>
-            &nbsp;·&nbsp;
-            <a href="https://about.me/andynorman" target="_blank" rel="author noopener noreferrer">About.me</a>
-          </p>
+        </div>
+        <div class="founder__row reveal">
+          <img src="https://www.antekautomation.com/andy-norman.webp"
+               alt="Andy Norman, founder of Antek Automation"
+               class="founder__photo"
+               loading="lazy"
+               width="240" height="240">
+          <div class="founder__body">
+            <p>Antek Automation was founded by Andy Norman. After 30+ years in field service and managed print —
+              progressing from field engineer to service management — Andy builds AI voice agents, chatbots and
+              workflow automation for small businesses across Hampshire, as a Certified Retell AI Partner.
+              Based in Andover, he is hands-on with every build.</p>
+            <p class="founder__links">
+              <a href="https://www.linkedin.com/in/andy-norman-ab78443a1" target="_blank" rel="author noopener noreferrer">Andy Norman on LinkedIn</a>
+              &nbsp;·&nbsp;
+              <a href="https://about.me/andynorman" target="_blank" rel="author noopener noreferrer">About.me</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
+    <style>
+      .founder__row {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 32px;
+        align-items: center;
+        max-width: 900px;
+        margin: 32px auto 0;
+      }
+      .founder__photo {
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #1e293b;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      }
+      .founder__body p { color: var(--text-secondary, #94a3b8); line-height: 1.6; margin: 0 0 14px; }
+      .founder__body p:last-child { margin-bottom: 0; }
+      .founder__links a { color: var(--accent-secondary, #06b6d4); text-decoration: none; }
+      .founder__links a:hover { text-decoration: underline; }
+      @media (max-width: 768px) {
+        .founder__row { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+        .founder__photo { width: 180px; height: 180px; margin: 0 auto; }
+      }
+    </style>
 
     <!-- ═══ AGENTIC AI (Hampshire) ═══ -->
     <section class="agentic-ai" id="agentic-ai">
@@ -3458,17 +3494,13 @@
         </div>
         <div class="contact__grid">
           <div class="contact__form-wrap reveal">
-            <h3>Send Us a Message</h3>
-            <div class="conv-form-trust">
-              <strong>Free 30-min discovery call.</strong> No sales pitch. We reply within 1 hour Mon–Fri 9–6.
-            </div>
             <!-- n8n hosted form embed -->
             <iframe
               src="https://auto.juxtarank.com/form/17d8ddcd-4860-4dde-bd4a-2de0adb518e2"
               title="Contact AI Services Hampshire"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              style="width:100%;min-height:780px;border:1px solid #1e293b;border-radius:8px;background:#0a0f1c;display:block;"
+              style="width:100%;min-height:1200px;border:1px solid #1e293b;border-radius:8px;background:#0a0f1c;display:block;padding:0;"
               allow="clipboard-write"></iframe>
           </div>
           <div class="contact__cal reveal">
@@ -3975,22 +4007,19 @@
   </script>
 
 
-  <!-- ═══ BOOKING POPUP ═══════════════════════════════ -->
-  <div class="bp-modal" id="bpModal" role="dialog" aria-modal="true" aria-label="Book a free 30-minute discovery call" aria-hidden="true">
-    <div class="bp-modal__card">
-      <button type="button" class="bp-modal__close" id="bpClose" aria-label="Close">&times;</button>
-      <div class="bp-modal__header">
-        <p class="bp-modal__label">Before you go</p>
-        <h2 class="bp-modal__title">Book a free 30-min discovery call</h2>
-        <p class="bp-modal__sub">We'll look at where AI can save you time and win you more business. No sales pitch. Replies within 1 hour Mon–Fri.</p>
-      </div>
-      <div class="bp-modal__cal" id="bp-cal-inline"></div>
-    </div>
-  </div>
-
+  <!-- BOOKING POPUP REMOVED — nav CTA + hero CTA now scroll to #contact natively -->
   <script>
     (function () {
-      var KEY = 'antek_booking_popup_seen';
+      // Stub kept so any external script calling openBookingPopup() does not throw.
+      window.openBookingPopup = function () {
+        var c = document.getElementById('contact');
+        if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+    })();
+  </script>
+  <!-- LEGACY POPUP CODE INTENTIONALLY REMOVED — see commit log -->
+  <script style="display:none" type="text/plain" data-disabled="true">
+    (function () {
       var modal = document.getElementById('bpModal');
       var closeBtn = document.getElementById('bpClose');
       var calMount = document.getElementById('bp-cal-inline');
