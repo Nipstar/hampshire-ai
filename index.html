@@ -2213,16 +2213,11 @@
       display: none !important;
     }
 
-    /* Retell widget — move FAB to bottom-left so it does not cover the cookie banner */
+    /* Retell widget — stays bottom-right; cookie banner sits bottom-left so they don't collide */
     #retell-widget-root {
-      right: auto !important;
-      left: 24px !important;
-    }
-    @media (max-width: 480px) {
-      #retell-widget-root {
-        left: 16px !important;
-        bottom: 16px !important;
-      }
+      right: 24px !important;
+      left: auto !important;
+      bottom: 24px !important;
     }
     .conv-sticky-cta a {
       display: flex;
@@ -2271,9 +2266,8 @@
     }
     .ck-banner.visible { display: block; }
     @media (min-width: 640px) {
-      .ck-banner { left: auto; right: 24px; bottom: 24px; }
+      .ck-banner { left: 24px; right: auto; bottom: 24px; }
     }
-    /* sticky CTA removed — cookie banner no longer needs lift */
     @keyframes ckSlideIn {
       from { transform: translateY(20px); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
