@@ -2201,22 +2201,8 @@
     .conv-form-trust strong { color: var(--text-primary); }
 
     .conv-sticky-cta {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      z-index: 9998;
-      background: rgba(10, 15, 28, 0.96);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid var(--border);
-      box-shadow: 0 -4px 16px rgba(0,0,0,0.25);
-      transform: translateY(100%);
-      transition: transform 0.25s ease;
+      display: none !important;
     }
-    .conv-sticky-cta.visible { transform: translateY(0); }
     .conv-sticky-cta a {
       display: flex;
       align-items: center;
@@ -2241,10 +2227,7 @@
     }
     .conv-sticky-cta a:last-child:hover { filter: brightness(1.1); }
     .conv-sticky-cta svg { flex-shrink: 0; }
-    @media (max-width: 768px) {
-      .conv-sticky-cta { display: grid; }
-      footer { padding-bottom: 72px !important; }
-    }
+    /* sticky CTA disabled — covered by nav + hero + footer CTAs */
 
   
     /* ═══ COOKIE CONSENT BANNER ═════════════════════════ */
@@ -2269,10 +2252,7 @@
     @media (min-width: 640px) {
       .ck-banner { left: auto; right: 24px; bottom: 24px; }
     }
-    @media (max-width: 768px) {
-      /* Lift above sticky CTA bar */
-      .ck-banner { bottom: 80px; }
-    }
+    /* sticky CTA removed — cookie banner no longer needs lift */
     @keyframes ckSlideIn {
       from { transform: translateY(20px); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
@@ -3670,14 +3650,47 @@
       /* Open Retell chat widget programmatically (used by Demo CTA) */
       window.openAntekChat = function() {
         if (window.gtag) gtag('event', 'chat_start', { page_town: window.__antek_town || 'unknown', cta_position: 'demo-cta' });
-        // Walk DOM looking for the Retell widget shadow host
-        var hosts = document.querySelectorAll('*');
-        for (var i = 0; i < hosts.length; i++) {
-          if (hosts[i].shadowRoot) {
-            var btn = hosts[i].shadowRoot.querySelector('button');
-            if (btn) { btn.click(); return; }
+
+        function tryClickFab() {
+          // 1. Direct Retell custom element / known IDs
+          var directSel = [
+            'retell-widget',
+            'retell-chat-widget',
+            '#retell-widget-fab',
+            '#retell-chat-widget-fab',
+            '[data-retell-widget]',
+            '[data-retell-fab]'
+          ];
+          for (var i = 0; i < directSel.length; i++) {
+            var el = document.querySelector(directSel[i]);
+            if (!el) continue;
+            // FAB might live in shadowRoot or as a child button
+            var btn = (el.shadowRoot && el.shadowRoot.querySelector('button, [role="button"]'))
+                   || el.querySelector('button, [role="button"]')
+                   || (el.tagName === 'BUTTON' ? el : null);
+            if (btn && btn.click) { btn.click(); return true; }
           }
+
+          // 2. Fall back: walk shadow hosts, but skip Cal.com + n8n iframes
+          var hosts = document.querySelectorAll('*');
+          for (var j = 0; j < hosts.length; j++) {
+            var h = hosts[j];
+            if (!h.shadowRoot) continue;
+            var tag = (h.tagName || '').toLowerCase();
+            if (tag.indexOf('cal') > -1) continue;
+            var b = h.shadowRoot.querySelector('button, [role="button"]');
+            if (b && b.click) { b.click(); return true; }
+          }
+          return false;
         }
+
+        // Retry up to 8 times over ~2s — widget may not have mounted yet
+        var attempts = 0;
+        (function poll() {
+          if (tryClickFab()) return;
+          if (++attempts > 8) return;
+          setTimeout(poll, 250);
+        })();
       };
 
 
