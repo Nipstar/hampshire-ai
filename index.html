@@ -2212,6 +2212,18 @@
     .conv-sticky-cta {
       display: none !important;
     }
+
+    /* Retell widget — move FAB to bottom-left so it does not cover the cookie banner */
+    #retell-widget-root {
+      right: auto !important;
+      left: 24px !important;
+    }
+    @media (max-width: 480px) {
+      #retell-widget-root {
+        left: 16px !important;
+        bottom: 16px !important;
+      }
+    }
     .conv-sticky-cta a {
       display: flex;
       align-items: center;
@@ -3663,6 +3675,9 @@
         function tryClickFab() {
           // 1. Direct Retell custom element / known IDs
           var directSel = [
+            '#retell-widget-root button',
+            '#retell-widget-root [role="button"]',
+            '#retell-widget-root',
             'retell-widget',
             'retell-chat-widget',
             '#retell-widget-fab',
