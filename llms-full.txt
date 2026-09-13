@@ -20,7 +20,7 @@
 - Service area: Hampshire and surrounding Hampshire businesses
 
 ## Core Services (pricing on brand hub)
-- AI Receptionist / Voice Agents: from £97/month (Starter, 120 mins) + £249 setup. Standard £198/month, Pro on request. £0.18/min overage.
+- AI Receptionist / Voice Agents: from £97/month (Starter, 120 mins) + £497 setup. Standard £198/month, Pro on request. £0.18/min overage.
 - AI Chatbots: from £57/month + £149 setup. Unlimited conversations.
 - Workflow Automation: from £250 one-off. Clients typically save 10–20 hours/week on admin.
 - GEO Audits: AI search visibility audits. Quick Check £247, Full Audit £497, Audit + Fix £997.
@@ -56,7 +56,7 @@ Hampshire AI is part of the **Antek Automation** network — a UK AI automation 
 We deliver AI voice agents, AI chatbots, and workflow automation to businesses across Andover, Hampshire, and the surrounding area. Discovery calls are free and run for 30 minutes. Most voice agents and chatbots go live within 24-48 hours.
 
 ### Pricing (UK GBP)
-- **AI Receptionist / Voice Agent:** Starter £97/month (120 included call minutes) + £249 setup. Standard £198/month (240 minutes) + £249 setup. Pro: contact sales. Overage £0.18/min.
+- **AI Receptionist / Voice Agent:** Starter £97/month (120 included call minutes) + £497 setup. Standard £198/month (240 minutes) + £497 setup. Pro: contact sales. Overage £0.18/min.
 - **AI Chatbot:** £57/month + £149 setup. Unlimited conversations.
 - **Workflow Automation:** From £250 one-off. Built on n8n (open-source, self-hosted).
 - **GEO Audits:** Quick Check £247, Full Audit £497, Audit + Fix £997, Monthly Retainer £497/month (min 3 months).
