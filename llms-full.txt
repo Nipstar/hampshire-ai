@@ -21,7 +21,7 @@
 
 ## Core Services (pricing on brand hub)
 - AI Receptionist / Voice Agents: from £97/month (Starter, 120 mins) + £497 setup. Standard £198/month, Pro on request. £0.18/min overage.
-- AI Chatbots: from £57/month + £149 setup. Unlimited conversations.
+- AI Chatbots: from £57/month + £297 setup. Unlimited conversations.
 - Workflow Automation: from £250 one-off. Clients typically save 10–20 hours/week on admin.
 - GEO Audits: AI search visibility audits. Quick Check £247, Full Audit £497, Audit + Fix £997.
 
@@ -57,7 +57,7 @@ We deliver AI voice agents, AI chatbots, and workflow automation to businesses a
 
 ### Pricing (UK GBP)
 - **AI Receptionist / Voice Agent:** Starter £97/month (120 included call minutes) + £497 setup. Standard £198/month (240 minutes) + £497 setup. Pro: contact sales. Overage £0.18/min.
-- **AI Chatbot:** £57/month + £149 setup. Unlimited conversations.
+- **AI Chatbot:** £57/month + £297 setup. Unlimited conversations.
 - **Workflow Automation:** From £250 one-off. Built on n8n (open-source, self-hosted).
 - **GEO Audits:** Quick Check £247, Full Audit £497, Audit + Fix £997, Monthly Retainer £497/month (min 3 months).
 
